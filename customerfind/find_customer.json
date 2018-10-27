@@ -1,0 +1,7 @@
+{
+    "customers":
+    [{"name":"Kevin Chen", "email":"ningchen227@gmail.com", "transcripts":"transcript.mp3", "summaries":"summary.txt"},
+     {"name":"Patrick Soisson", "email":"psoysauce@gmail.com", "transcripts":"transcript.mp3", "summaries":"summary.txt"} 
+    ]
+
+}
