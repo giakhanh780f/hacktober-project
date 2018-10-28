@@ -1,0 +1,165 @@
+<html style="" class=" js flexbox canvas canvastext webgl no-touch geolocation postmessage websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers applicationcache svg inlinesvg smil svgclippaths js flexbox canvas canvastext webgl no-touch geolocation postmessage websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers applicationcache svg inlinesvg smil svgclippaths">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Phantom</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Free HTML5 Website Template by FreeHTML5.co">
+	<meta name="keywords" content="free website templates, free html5, free template, free bootstrap, free website template, html5, css3, mobile first, responsive">
+	<meta name="author" content="FreeHTML5.co">
+
+
+	<!-- 
+	//////////////////////////////////////////////////////
+
+	FREE HTML5 TEMPLATE 
+	DESIGNED & DEVELOPED by FREEHTML5.CO
+		
+	Website: 		http://freehtml5.co/
+	Email: 			info@freehtml5.co
+	Twitter: 		http://twitter.com/fh5co
+	Facebook: 		https://www.facebook.com/fh5co
+
+	//////////////////////////////////////////////////////
+	 -->
+
+
+	<!-- Facebook and Twitter integration -->
+	<meta property="og:title" content="">
+	<meta property="og:image" content="">
+	<meta property="og:url" content="">
+	<meta property="og:site_name" content="">
+	<meta property="og:description" content="">
+	<meta name="twitter:title" content="">
+	<meta name="twitter:image" content="">
+	<meta name="twitter:url" content="">
+	<meta name="twitter:card" content="">
+
+
+	<script src="https://www.gstatic.com/firebasejs/5.5.5/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/5.5.5/firebase-firestore.js"></script>
+	<script type="text/javascript" src="js/loadCustomerProfile.js"></script>
+	<script type="text/javascript" src="js/firestore.js"></script>
+
+	<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700" rel="stylesheet">
+
+	<!-- Animate.css -->
+	<link rel="stylesheet" href="css/animate.css">
+	<!-- Icomoon Icon Fonts-->
+	<link rel="stylesheet" href="css/icomoon.css">
+	<!-- Themify Icons-->
+	<link rel="stylesheet" href="css/themify-icons.css">
+	<!-- Bootstrap  -->
+	<link rel="stylesheet" href="css/bootstrap.css">
+
+	<!-- Magnific Popup -->
+	<link rel="stylesheet" href="css/magnific-popup.css">
+
+	<!-- Owl Carousel  -->
+	<link rel="stylesheet" href="css/owl.carousel.min.css">
+	<link rel="stylesheet" href="css/owl.theme.default.min.css">
+
+	<!-- Theme style  -->
+	<link rel="stylesheet" href="css/style.css">
+
+	<!-- Modernizr JS -->
+	<script src="js/modernizr-2.6.2.min.js"></script>
+	<!-- FOR IE9 below -->
+	<!--[if lt IE 9]>
+	<script src="js/respond.min.js"></script>
+	<![endif]-->
+
+</head>
+
+<body onload="showCustomerInfo();" class="">
+
+	<div class="gtco-loader" style="display: none;"></div>
+
+	<div id="page"><a href="#" class="js-gtco-nav-toggle gtco-nav-toggle gtco-nav-white"><i></i></a>
+		<div id="gtco-offcanvas">
+			<ul>
+				<li class="offcanvas-has-dropdown">
+					<a href="#">Dropdown</a>
+					<ul class="dropdown">
+						<li><a href="#">Web Design</a></li>
+						<li><a href="#">eCommerce</a></li>
+						<li><a href="#">Branding</a></li>
+						<li><a href="#">API</a></li>
+					</ul>
+				</li>
+				<li><a href="pricing.html">Pricing</a></li>
+				<li><a href="contact.html">Contact</a></li>
+				<li class="btn-cta"><a href="#"><span>Get started</span></a></li>
+			</ul>
+		</div>
+
+		<div class="page-inner">
+			<nav class="gtco-nav" role="navigation">
+				<div class="gtco-container">
+
+					<div class="row">
+						<div class="col-sm-4 col-xs-12">
+							<div id="gtco-logo"><a href="index.html">Phantom <em>.</em></a></div>
+						</div>
+					</div>
+
+					<div class="col-sm-6 col-xs-12">
+						<div id="gtco-header"><input type="text" readOnly="true" class="form-control" id="title-info"></div>
+					</div>
+
+				</div>
+			</nav>
+
+			<header id="gtco-header" class="gtco-cover" role="banner" style="background-image: url(images/img_4.jpg)">
+				<div class="overlay"></div>
+				<div class="gtco-container">
+					<div class="row">
+						<div class="col-md-12 col-md-offset-0 text-left">
+							<div class="row row-mt-15em">
+								<div class="col-md-3 mt-text animate-box fadeInUp animated-fast" data-animate-effect="fadeInUp">
+								</div>
+								<div class="col-md-6 col-md-push-1 animate-box fadeInRight animated-fast" data-animate-effect="fadeInRight">
+									<div class="form-wrap">
+										<div class="tab">
+											<ul class="tab-menu">
+											</ul>
+											<div class="tab-content">
+												<div class="tab-content-inner active" data-content="login" id="content-frame">
+													<form action="#">
+														<div class="row form-group">
+															<div class="col-md-12">
+																<label for="BAN">Billing Account Number (BAN)</label>
+																<input type="text" readOnly="true" class="form-control" id="BAN">
+															</div>
+														</div>
+														<div class="row form-group">
+															<div class="col-md-12">
+																<label for="summary">Summary</label>
+																<textarea type="text" rows=8 wrap="hard" readOnly="true" class="form-control" id="summary">
+																</textarea>
+															</div>
+														</div>
+														<div class="row form-group">
+															<div class="col-md-12">
+																<input type="reset" class="btn btn-primary" value="Finish Customer Interaction" onclick="finish()">
+															</div>
+														</div>
+												</div>
+												</form>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+		</div>
+		</header>
+	</div>
+	</div>
+
+</body>
+
+</html>
