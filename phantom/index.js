@@ -107,8 +107,21 @@ app.use((req, res, next) => {
     next()
 })
 
+
+function getRndInteger(min, max) {
+    return Math.floor(Math.random() * (max - min)) + min;
+}
+
 function main() {
-    const filename = "new7.m4a";
+
+    let rand = getRndInteger(1, 3);
+
+    let filename;
+
+    if (rand == 0)
+        filename = "new7.m4a";
+    else
+        filename = "new8.m4a";
 
     downloadFile(filename, async () => {
         let str = await getText(filename);
@@ -126,25 +139,25 @@ function main() {
 }
 
 app.post('/', (req, res) => {
-    const fname = "new7.m4a";
 
-    console.log("GET REQUEST CALLED.")
+    let rand = getRndInteger(1, 3);
+
+    let fname;
+
+    if (rand == 1)
+        fname = "new7.m4a";
+    else
+        fname = "new8.m4a";
+
+
+    console.log("--> Client side post request received.")
     const body = req.body;
-
-    console.log('body ' + JSON.stringify(body))
 
     const reqType = body['request'];
 
-    console.log("Request Type " + reqType)
-
     if (reqType === "transcript") {
-
-        console.log("Sending actual transcript.")
-
         downloadFile(fname, async function () {
             const transcript = await getText(fname);
-            console.log("Sending transcript.")
-
             let summary = await processText(transcript);
 
             const transObj = {
@@ -153,18 +166,15 @@ app.post('/', (req, res) => {
             }
 
             let stringSend = JSON.stringify(transObj)
-
             console.log(stringSend)
 
+            email.emailTranscript(new Date().toISOString(), transcript, 'aneeshsaripalli@gmail.com');
             res.send(stringSend)
         })
     } else {
-
         const empty = {
             transcript: ""
         }
-
-        console.log("Ending with empty object")
 
         res.send(JSON.stringify(empty))
     }
