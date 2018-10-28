@@ -12,9 +12,35 @@ function loadTranscript() {
             }),
         }).then(response => response.json())
         .then(response => {
-            response.replace(/\n" "/g, "\n");
-            document.getElementById('transcript').value = response
-            document.getElementById("transcript").readOnly = false
+            let transcript = response['transcript']
+            let summary = response['summary']
+
+            sessionStorage.transcript = transcript
+            sessionStorage.summary = summary
+
+            let problem = summary[0]
+
+            let problemString = ""
+            problem.forEach(prob => problemString += prob + ", ");
+            problemString = problemString.substr(0, problemString.length - 2)
+
+            let solution = summary[1]
+
+            let solutionString = ""
+            solution.forEach(sol => solutionString += sol + ", ");
+            solutionString = solutionString.substr(0, solutionString.length - 2)
+
+            let location = summary[2]
+
+            let locationString = ""
+            location.forEach(loc => locationString += loc + ", ")
+            locationString = locationString.substr(0, locationString.length - 2)
+
+            document.getElementById("situation").value = problemString
+            document.getElementById("duration").value = ""
+            document.getElementById("solution").value = solutionString
+            document.getElementById("location").value = locationString
+
             document.getElementById("situation").readOnly = false
             document.getElementById("location").readOnly = false
             document.getElementById("duration").readOnly = false
@@ -24,7 +50,7 @@ function loadTranscript() {
 }
 
 function pushToFirestore() {
-    let transcript = document.getElementById("transcript").value
+    let transcript = sessionStorage.transcript
     let situation = document.getElementById("situation").value
     let location = document.getElementById("location").value
     let duration = document.getElementById("duration").value

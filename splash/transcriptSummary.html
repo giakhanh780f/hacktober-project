@@ -38,8 +38,8 @@
     <meta name="twitter:card" content="">
 
 
-	<script src="https://www.gstatic.com/firebasejs/5.5.5/firebase-app.js"></script>
-	<script src="https://www.gstatic.com/firebasejs/5.5.5/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.5.5/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.5.5/firebase-firestore.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700" rel="stylesheet">
     <script type="text/javascript" src="js/transcriptSummary.js"></script>
     <script type="text/javascript" src="js/firestore.js"></script>
@@ -112,37 +112,34 @@
                                                         <div class="row form-group">
                                                             <div class="col-md-12">
                                                                 <label for="situation">Situation</label>
-                                                                <input type="text" readOnly class="form-control" id="situation">
+                                                                <textarea rows=2 type="text" readOnly class="form-control"
+                                                                    id="situation">
+                                                                </textarea>
                                                             </div>
-                                                        </div>
-                                                        <div class="row form-group">
                                                             <div class="col-md-12">
                                                                 <label for="location">Location</label>
-                                                                <input type="text" readOnly class="form-control" id="location">
+                                                                <textarea rows=2 type="text" readOnly class="form-control"
+                                                                    id="location">
+                                                                </textarea>
                                                             </div>
-                                                        </div>
-                                                        <div class="row form-group">
                                                             <div class="col-md-12">
                                                                 <label for="duration">Duration</label>
-                                                                <input type="text" readOnly class="form-control" id="duration">
+                                                                <textarea rows=2 type="text" readOnly class="form-control"
+                                                                    id="duration">
+                                                                </textarea>
                                                             </div>
-                                                        </div>
-                                                        <div class="row form-group">
                                                             <div class="col-md-12">
                                                                 <label for="solution">Solution</label>
-                                                                <input type="text" readOnly class="form-control" id="solution">
-                                                            </div>
-                                                        </div>
-                                                        <div class="row form-group">
-                                                            <div class="col-md-12">
-                                                                <label for="transcript">Transcript</label>
-                                                                <textarea wrap="hard" readOnly type="text" class="form-control" id="transcript">
+                                                                <textarea rows=2 type="text" readOnly class="form-control"
+                                                                    id="solution">
                                                                 </textarea>
                                                             </div>
                                                         </div>
                                                         <div class="row form-group">
                                                             <div class="col-md-12">
-                                                                <input type="reset" id="push_data" onclick="pushToFirestore()" class="btn btn-primary" value="Submit Interaction Summary." disabled>
+                                                                <input type="reset" id="push_data" onclick="pushToFirestore()"
+                                                                    class="btn btn-primary" value="Submit Interaction Summary."
+                                                                    disabled>
                                                             </div>
                                                         </div>
                                                     </form>

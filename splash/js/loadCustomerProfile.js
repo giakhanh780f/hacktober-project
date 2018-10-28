@@ -17,9 +17,7 @@ function showCustomerInfo() {
 
     const calls = JSON.parse(sessionStorage.calls)
 
-    console.log(calls)
-
-    setSummaryInfo(calls, 0)
+    updateSummaryInfo();
 }
 
 function setSummaryInfo(calls, callsIndex) {

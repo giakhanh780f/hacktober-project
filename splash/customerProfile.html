@@ -37,9 +37,9 @@
 	<meta name="twitter:card" content="">
 
 
+	<script type="text/javascript" src="js/loadCustomerProfile.js"></script>
 	<script src="https://www.gstatic.com/firebasejs/5.5.5/firebase-app.js"></script>
 	<script src="https://www.gstatic.com/firebasejs/5.5.5/firebase-firestore.js"></script>
-	<script type="text/javascript" src="js/loadCustomerProfile.js"></script>
 	<script type="text/javascript" src="js/firestore.js"></script>
 
 	<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700" rel="stylesheet">
@@ -142,8 +142,9 @@
 														</div>
 														<div class="row form-group">
 															<div class="col-md-12">
-																<input type="reset" class="btn btn-primary" id="finish" value="Finish Customer Interaction" onclick="finish()">
-																<input type="submit" class="btn btn-primary" id="iterate" value="Iterate Summaries" onclick="updateSummaryInfo()">
+																<input type="submit" class="btn" id="iterate" value="Iterate Summaries" onclick="updateSummaryInfo()">
+																<input type="reset" class="btn btn-primary" id="finishCall" value="Finish Customer Interaction" onclick="finish()">
+
 															</div>
 														</div>
 													</form>
