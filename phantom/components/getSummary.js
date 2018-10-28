@@ -17,7 +17,6 @@ const nlu = new NLU_MODULE(bluemix_auth);
 function getSummary(keywords, keywordsScore, str, location) {
 
     console.log("Beginning summary creation.")
-
     let issueSummary = []
     let solSummary = []
 
@@ -40,9 +39,8 @@ function getSummary(keywords, keywordsScore, str, location) {
         }
     }
     var summaries = [issueSummary, solSummary, location];
-
     console.log("Finished summary creation.")
-
+    
     return summaries;
 }
 
@@ -86,7 +84,7 @@ function processText(inputText) {
 
                         if (ctr === sentences.length - 1) {
                             console.log("Watson processing complete. Now doing feature extraction.")
-                            resolve(doAnalysis(analysis_array))
+                            resolve(doAnalysis(analysis_array, inputText))
                         }
                     }
                 });
@@ -97,7 +95,7 @@ function processText(inputText) {
 
 
 //Array is the processed array of json objects.
-function doAnalysis(array) {
+function doAnalysis(array, originalText) {
     console.log("Beginning analysis.")
     var keywords = [];
     var keywordsScore = [];
@@ -111,10 +109,7 @@ function doAnalysis(array) {
             total += word.sentiment.score;
             let text = word.text;
             let score = word.sentiment.score;
-            let label = word.sentiment.label;
-            let relevance = word.sentiment.relevance;
-            //let anger = word.emotion.anger
-            //let joy = word.emotion.joy;
+            
             keywords.push(text);
             keywordsScore.push(score);
         })
@@ -127,13 +122,8 @@ function doAnalysis(array) {
 
     console.log("String parsing over. Going to summary creation.")
 
-    let str = ""
-    array.forEach(word => str = str + word)
-
-
-    return getSummary(keywords, keywordsScore, str, location);
+    return getSummary(keywords, keywordsScore, originalText, location);
 }
-
 
 module.exports = {
     processText
