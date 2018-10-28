@@ -1,19 +1,26 @@
 const NLU_MODULE = require('watson-developer-cloud/natural-language-understanding/v1.js');
 
-let str = "thank you for calling T-Mobile this is Patrick\nhello I am having issues with Cellular Connection here in Austin\nokay let me check the service that is over there\nall right so after checking it appears Austin is all right are you getting any signal on your phone or do\nyou have no bars at all I have none at all\nall right did you check that cellular data is turned on in your settings I have checked and there's on\nall right then you you'll have to bring your phone into a local T-Mobile store to get it fixed\nall right thank you\nyou're welcome have a nice day\n";
+let str = 
+    "thank you for calling T-Mobile this is Patrick, how may I help you\n" +                                      
+    "Howdy, my daughter's phone was dropped into the toilet\n" +                     // Issue
+    "Where are you located and what kind of phone does you daughter have?\n" +   // Issue
+    "I live in Chicago and my daughter has the iPhone 7\n" + 
+    "Alright, well the Apple Store will be better equipped to assist you.\n" + 
+    "Ok, thanks for your help\n" + 
+    "You're welcome thank you for calling T-Mobile have a nice day\n";
 
 const bluemix_auth = require('./auth/bluemix.json')
 
 const nlu = new NLU_MODULE(bluemix_auth);
 
-function getSummary(keywords, keywordsScore, str) {
+//keywords is array of all the keywords, is parallel to keywordScore array which holds the given score for each keyword
+function getSummary(keywords, keywordsScore, str, location) {
     let issueSummary = "Issues: \n";
-    let solSummary = "\nSolutions: \n";
+    let solSummary = "Solutions: \n";
+    //Situation, Duration
     for(var i = 0; i < keywords.length; i++){
-        /*if((keywordsScore[i] == 0){
-            
-        }*/
-        if(keywordsScore[i] < 0){ 
+        console.log(keywords[i] + " : " + keywordsScore[i]);
+        if(keywordsScore[i] < 0){ //negative score
             var splitStr = str.split('\n');
             splitStr.forEach(element => {
 
@@ -23,31 +30,19 @@ function getSummary(keywords, keywordsScore, str) {
             })
             str.indexOf(keywords[i]);
         }
-        else if(keywordsScore[i] > 0) {
-            //positive
+        else if(keywordsScore[i] > 0) { //positive score
             var splitStr = str.split('\n');
             splitStr.forEach(element => {
-                if(element.includes(keywords[i]) && !solSummary.includes(keywords[i])) {
-                    solSummary += element + "\n";                    
+                if(element.includes(keywords[i]) && !solSummary.includes(keywords[i]) && !issueSummary.includes(keywords[i])) {
+                    if(!element.includes("thank"))
+                        solSummary += element + "\n";                    
                 } 
             })
             str.indexOf(keywords[i]);
         }
     }
-
-    /*
-    let jsonObj = JSON.parse(element);
-    jsonObj.relations.forEach(word => {
-        
-    })*/
-    return issueSummary + solSummary;
-}
-
-function findNewLine(str, startIndex) {
-    for (let i = startIndex; i < str.length; i++) {
-        if (str.charAt(i) == '\n') return i;
-    }
-    return -1;
+    var summaries = [issueSummary, solSummary, location];
+    return summaries;
 }
 
 /*DO NOT TOUCH*/
@@ -96,37 +91,38 @@ async function processText(inputText) {
     }
 }
 
-/**
- * Array is the processed array of json objects.
- * Do whatever the fuck you want with it.
- */
+
+//Array is the processed array of json objects.
 function doAnalysis(array) {
     var keywords = [];
     var keywordsScore = [];
+    var location = [];
     var avg;
     var total = 0;
     array.forEach(element => {
-        let jsonObj = JSON.parse(element)
-
-       // keyswords is an array
-       // console.log(jsonObj.keywords)
-       let average = 0;
+        console.log(element);
+        let jsonObj = JSON.parse(element);
+        let average = 0;
         jsonObj.keywords.forEach(word => {
             total += word.sentiment.score;
-            let text = word.text
-            let score = word.sentiment.score
-            let label = word.sentiment.label
-            let relevance = word.sentiment.relevance                                              
-
-            console.log(text, score, label, relevance);
+            let text = word.text;
+            let score = word.sentiment.score;
+            let label = word.sentiment.label;
+            let relevance = word.sentiment.relevance;
+            //let anger = word.emotion.anger
+            //let joy = word.emotion.joy;
             keywords.push(text);
             keywordsScore.push(score);
+        })   
+        jsonObj.entities.forEach(word => {
+            if(word.type == "Location" && !location.includes(word.text))
+                location.push(word.text);
         })
-        
     })
     average = (total / array.length);
     console.log("Average value: " + average);
-    console.log(getSummary(keywords, keywordsScore, str));
+    console.log(getSummary(keywords, keywordsScore, str, location));
 }
+
 
 processText(str)
