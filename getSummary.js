@@ -19,7 +19,6 @@ function getSummary(keywords, keywordsScore, str, location) {
     let solSummary = "Solutions: \n";
     //Situation, Duration
     for(var i = 0; i < keywords.length; i++){
-        console.log(keywords[i] + " : " + keywordsScore[i]);
         if(keywordsScore[i] < 0){ //negative score
             var splitStr = str.split('\n');
             splitStr.forEach(element => {
@@ -100,7 +99,6 @@ function doAnalysis(array) {
     var avg;
     var total = 0;
     array.forEach(element => {
-        console.log(element);
         let jsonObj = JSON.parse(element);
         let average = 0;
         jsonObj.keywords.forEach(word => {
@@ -120,8 +118,8 @@ function doAnalysis(array) {
         })
     })
     average = (total / array.length);
-    console.log("Average value: " + average);
-    console.log(getSummary(keywords, keywordsScore, str, location));
+    return getSummary(keywords, keywordsScore, str, location);
+
 }
 
 
