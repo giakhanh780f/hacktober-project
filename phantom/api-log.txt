@@ -1,0 +1,38 @@
+thank you for calling T-Mobile this is Kevin how may I help you
+ hello I am having annoying issues with my Cellular Connection here in Galveston
+ I just checked and the Galveston area seems to be in great shape are you seeing any signal on your phone
+ I have absolutely none at all
+ did you check that cellular data is turned on in your settings
+ I just checked and it is on
+ all right now you should bring your phone into your local store to get it repaired
+ all right thank you you're welcome thank you for calling T-Mobile have a nice day
+Watson processing complete. Now doing feature extraction.
+Beginning analysis.
+String parsing over. Going to summary creation.
+Beginning summary creation.
+Finished summary creation.
+[ [ '      "sentence": "hello I am having annoying issues with my Cellular Connection here in Galveston",',
+    '      "text": "annoying issues",',
+    '      "sentence": "hello I am having annoying issues with my Cellular Connection here in Galveston",',
+    '      "text": "Cellular Connection",',
+    '      "sentence": "I just checked and the Galveston area seems to be in great shape are you seeing any signal on your phone",',
+    '          "text": "Galveston",',
+    '              "text": "Galveston"',
+    '      "text": "Galveston area",',
+    '      "sentence": "hello I am having annoying issues with my Cellular Connection here in Galveston",',
+    '          "text": "Galveston",',
+    '              "text": "Galveston"',
+    '      "text": "Galveston",',
+    '      "text": "Galveston",' ],
+  [ '          "text": "T-Mobile",',
+    '              "text": "T-Mobile"',
+    '      "text": "T-Mobile",',
+    '      "text": "T-Mobile",',
+    '      "text": "Kevin",',
+    '      "text": "Kevin",',
+    '      "text": "local store",',
+    '      "sentence": "I just checked and the Galveston area seems to be in great shape are you seeing any signal on your phone",',
+    '      "text": "phone",',
+    '      "text": "phone",' ],
+  [ 'Galveston' ] ]
+Email sent: 250 2.0.0 OK 1540721891 d10sm4373010otj.59 - gsmtp

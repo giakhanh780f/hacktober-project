@@ -18,28 +18,25 @@ function getSummary(keywords, keywordsScore, str, location) {
 
     console.log("Beginning summary creation.")
 
-    let issueSummary = "Issues: \n";
-    let solSummary = "Solutions: \n";
-    //Situation, Duration
+    let issueSummary = []
+    let solSummary = []
+
     for (var i = 0; i < keywords.length; i++) {
         if (keywordsScore[i] < 0) { //negative score
             var splitStr = str.split('\n');
             splitStr.forEach(element => {
-
                 if (element.includes(keywords[i]) && !issueSummary.includes(keywords[i])) {
-                    issueSummary += element + "\n";
+                    issueSummary.push(element);
                 }
             })
-            str.indexOf(keywords[i]);
         } else if (keywordsScore[i] > 0) { //positive score
             var splitStr = str.split('\n');
             splitStr.forEach(element => {
                 if (element.includes(keywords[i]) && !solSummary.includes(keywords[i]) && !issueSummary.includes(keywords[i])) {
                     if (!element.includes("thank"))
-                        solSummary += element + "\n";
+                        solSummary.push(element);
                 }
             })
-            str.indexOf(keywords[i]);
         }
     }
     var summaries = [issueSummary, solSummary, location];

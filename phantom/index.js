@@ -9,6 +9,7 @@ const PORT = 3000;
 const remoteBucketURL = "gs://silicon-alpha-220717.appspot.com"
 
 const getSummary = require("./components/getSummary")
+const email = require('./components/email/email')
 
 const processText = getSummary.processText
 
@@ -114,9 +115,13 @@ function main() {
 
         console.log(str)
 
+        email.emailTranscript(new Date().toISOString(), str, 'aneeshsaripalli@gmail.com');
+
         let result = await processText(str)
 
         console.log(result)
+
+        return true
     })
 }
 main()
