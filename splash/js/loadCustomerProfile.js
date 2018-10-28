@@ -1,3 +1,5 @@
+let summaryCounter = 0;
+
 function showCustomerInfo() {
     console.log('Will now show customer info.')
 
@@ -17,16 +19,40 @@ function showCustomerInfo() {
 
     console.log(calls)
 
+    setSummaryInfo(calls, 0)
+}
+
+function setSummaryInfo(calls, callsIndex) {
     let summaryText = ""
 
-    let summary = calls[0].data.summary
+    let totalCalls = calls.length;
 
-    summaryText += `Situation: ${summary.situation}\n`
-    summaryText += `Location: ${summary.location}\n`
-    summaryText += `Duration: ${summary.duration}\n`
-    summaryText += `Solution: ${summary.solution}`
+    if (totalCalls != 0) {
+        let call = calls[callsIndex % calls.length]
+        let summary = call.data.summary;
 
-    document.getElementById("summary").value = summaryText
+        summaryText += `Situation: ${summary.situation}\n`
+        summaryText += `Location: ${summary.location}\n`
+        summaryText += `Duration: ${summary.duration}\n`
+        summaryText += `Solution: ${summary.solution}\n\n`
+
+        const timestamp = call.data.timestamp;
+
+        let milliseconds = timestamp.seconds * 1000 + timestamp.nanoseconds / 1000000
+
+        summaryText += `Timestamp: ${new Date(milliseconds).toDateString()}`
+
+        document.getElementById("summary").value = summaryText
+    } else {
+        document.getElementById("summary").value = "No past data available for this customer."
+    }
+}
+
+function updateSummaryInfo() {
+    setSummaryInfo(JSON.parse(sessionStorage.calls), summaryCounter++)
+    document.getElementById("iterate").setAttribute('hover', 'false')
+
+    return true
 }
 
 function finish() {

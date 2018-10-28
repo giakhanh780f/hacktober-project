@@ -16,7 +16,7 @@ async function search() {
 
                 const numbersQuery = await doc.ref.collection("numbers").get()
 
-                const callsQuery = await doc.ref.collection("calls").orderBy("timestamp", "desc").limit(1).get()
+                const callsQuery = await doc.ref.collection("calls").orderBy("timestamp", "desc").get()
 
                 var numbers = []
                 var calls = []
