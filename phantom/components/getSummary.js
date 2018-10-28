@@ -25,7 +25,8 @@ function getSummary(keywords, keywordsScore, str, location) {
             var splitStr = str.split('\n');
             splitStr.forEach(element => {
                 if (element.includes(keywords[i]) && !issueSummary.includes(keywords[i])) {
-                    issueSummary.push(element);
+                    if (issueSummary.indexOf(element) === -1)
+                        issueSummary.push(element);
                 }
             })
         } else if (keywordsScore[i] > 0) { //positive score
@@ -33,14 +34,15 @@ function getSummary(keywords, keywordsScore, str, location) {
             splitStr.forEach(element => {
                 if (element.includes(keywords[i]) && !solSummary.includes(keywords[i]) && !issueSummary.includes(keywords[i])) {
                     if (!element.includes("thank"))
-                        solSummary.push(element);
+                        if (solSummary.indexOf(element) === -1)
+                            solSummary.push(element);
                 }
             })
         }
     }
     var summaries = [issueSummary, solSummary, location];
     console.log("Finished summary creation.")
-    
+
     return summaries;
 }
 
@@ -109,7 +111,7 @@ function doAnalysis(array, originalText) {
             total += word.sentiment.score;
             let text = word.text;
             let score = word.sentiment.score;
-            
+
             keywords.push(text);
             keywordsScore.push(score);
         })

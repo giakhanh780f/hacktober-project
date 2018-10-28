@@ -24,7 +24,7 @@ Input #0, mov,mp4,m4a,3gp,3g2,mj2, from 'new7.m4a':
 Stream mapping:
   Stream #0:0 -> #0:0 (aac (native) -> flac (native))
 Press [q] to stop, [?] for help
-[flac @ 0000020b65e1f940] encoding as 24 bits-per-sample
+[flac @ 000002679ce2f940] encoding as 24 bits-per-sample
 Output #0, flac, to 'formatted_file.flac':
   Metadata:
     major_brand     : mp42
@@ -37,5 +37,5 @@ Output #0, flac, to 'formatted_file.flac':
       creation_time   : 2018-10-28T07:18:05.000000Z
       handler_name    : SoundHandle
       encoder         : Lavc58.34.100 flac
-size=    3712kB time=00:00:47.76 bitrate= 636.6kbits/s speed= 408x    
+size=    3712kB time=00:00:47.76 bitrate= 636.6kbits/s speed= 359x    
 video:0kB audio:3704kB subtitle:0kB other streams:0kB global headers:0kB muxing overhead: 0.221060%

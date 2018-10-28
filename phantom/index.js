@@ -124,10 +124,9 @@ function main() {
         return true
     })
 }
-main()
 
 app.post('/', (req, res) => {
-    const fname = "4.m4a";
+    const fname = "new7.m4a";
 
     console.log("GET REQUEST CALLED.")
     const body = req.body;
@@ -146,11 +145,18 @@ app.post('/', (req, res) => {
             const transcript = await getText(fname);
             console.log("Sending transcript.")
 
+            let summary = await processText(transcript);
+
             const transObj = {
-                transcript: transcript
+                transcript: transcript,
+                summary: summary
             }
 
-            res.send(JSON.stringify(transcript))
+            let stringSend = JSON.stringify(transObj)
+
+            console.log(stringSend)
+
+            res.send(stringSend)
         })
     } else {
 
