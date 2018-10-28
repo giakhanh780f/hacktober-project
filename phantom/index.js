@@ -106,10 +106,20 @@ app.use((req, res, next) => {
     next()
 })
 
-downloadFile("4.m4a", async () => {
-    let str = await getText("4.m4a");
-    processText(str)
-})
+function main() {
+    const filename = "new7.m4a";
+
+    downloadFile(filename, async () => {
+        let str = await getText(filename);
+
+        console.log(str)
+
+        let result = await processText(str)
+
+        console.log(result)
+    })
+}
+main()
 
 app.post('/', (req, res) => {
     const fname = "4.m4a";

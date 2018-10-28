@@ -1,20 +1,23 @@
 const NLU_MODULE = require('watson-developer-cloud/natural-language-understanding/v1.js');
 
-let str =
-    "thank you for calling T-Mobile this is Patrick, how may I help you\n" +
-    "Howdy, my daughter's phone was dropped into the toilet\n" + // Issue
-    "Where are you located and what kind of phone does you daughter have?\n" + // Issue
-    "I live in Chicago and my daughter has the iPhone 7\n" +
-    "Alright, well the Apple Store will be better equipped to assist you.\n" +
-    "Ok, thanks for your help\n" +
-    "You're welcome thank you for calling T-Mobile have a nice day\n";
+// let str =
+//     "thank you for calling T-Mobile this is Patrick, how may I help you\n" +
+//     "Howdy, my daughter's phone was dropped into the toilet\n" + // Issue
+//     "Where are you located and what kind of phone does you daughter have?\n" + // Issue
+//     "I live in Chicago and my daughter has the iPhone 7\n" +
+//     "Alright, well the Apple Store will be better equipped to assist you.\n" +
+//     "Ok, thanks for your help\n" +
+//     "You're welcome thank you for calling T-Mobile have a nice day\n";
 
-const bluemix_auth = require('./auth/bluemix.json')
+const bluemix_auth = require('../auth/bluemix.json')
 
 const nlu = new NLU_MODULE(bluemix_auth);
 
 //keywords is array of all the keywords, is parallel to keywordScore array which holds the given score for each keyword
 function getSummary(keywords, keywordsScore, str, location) {
+
+    console.log("Beginning summary creation.")
+
     let issueSummary = "Issues: \n";
     let solSummary = "Solutions: \n";
     //Situation, Duration
@@ -40,58 +43,65 @@ function getSummary(keywords, keywordsScore, str, location) {
         }
     }
     var summaries = [issueSummary, solSummary, location];
+
+    console.log("Finished summary creation.")
+
     return summaries;
 }
 
 /*DO NOT TOUCH*/
 // this function is literally dynamite. no touchy.
-async function processText(inputText) {
+function processText(inputText) {
     let analysis_array = []
 
     let ctr = 0;
     let sentences = inputText.split("\n")
-    for (let i = 0; i < sentences.length; i++) {
-        let sentence = sentences[i]
 
-        if (sentence.length !== 0) {
-            var parameters = {
-                'text': sentence,
-                'features': {
-                    'relations': {},
-                    'entities': {
-                        'emotion': true,
-                        'sentiment': true,
-                        'limit': 10
-                    },
-                    'keywords': {
-                        'emotion': true,
-                        'sentiment': true,
-                        'limit': 100
+    return new Promise((resolve, reject) => {
+        for (let i = 0; i < sentences.length; i++) {
+            let sentence = sentences[i]
+
+            if (sentence.length !== 0) {
+                var parameters = {
+                    'text': sentence,
+                    'features': {
+                        'relations': {},
+                        'entities': {
+                            'emotion': true,
+                            'sentiment': true,
+                            'limit': 10
+                        },
+                        'keywords': {
+                            'emotion': true,
+                            'sentiment': true,
+                            'limit': 100
+                        }
                     }
                 }
+                nlu.analyze(parameters, function (err, response) {
+                    if (err) {
+                        console.log('error:', err);
+                    } else {
+                        var jsonResult = JSON.stringify(response, null, 2);
+
+                        ctr++;
+                        analysis_array.push(jsonResult)
+
+                        if (ctr === sentences.length - 1) {
+                            console.log("Watson processing complete. Now doing feature extraction.")
+                            resolve(doAnalysis(analysis_array))
+                        }
+                    }
+                });
             }
-            nlu.analyze(parameters, async function (err, response) {
-                if (err) {
-                    console.log('error:', err);
-                } else {
-                    var jsonResult = JSON.stringify(response, null, 2);
-
-                    ctr++;
-                    analysis_array.push(jsonResult)
-
-                    if (ctr === sentences.length - 1) {
-                        doAnalysis(analysis_array)
-                    }
-                }
-            });
-
         }
-    }
+    });
 }
 
 
 //Array is the processed array of json objects.
 function doAnalysis(array) {
+    console.log("Beginning analysis.")
     var keywords = [];
     var keywordsScore = [];
     var location = [];
@@ -117,8 +127,14 @@ function doAnalysis(array) {
         })
     })
     average = (total / array.length);
-    return getSummary(keywords, keywordsScore, str, location);
 
+    console.log("String parsing over. Going to summary creation.")
+
+    let str = ""
+    array.forEach(word => str = str + word)
+
+
+    return getSummary(keywords, keywordsScore, str, location);
 }
 
 

@@ -9,22 +9,22 @@ ffmpeg version N-92273-g59a35fe1f6 Copyright (c) 2000-2018 the FFmpeg developers
   libswscale      5.  2.100 /  5.  2.100
   libswresample   3.  2.100 /  3.  2.100
   libpostproc    55.  2.100 / 55.  2.100
-Input #0, mov,mp4,m4a,3gp,3g2,mj2, from '4.m4a':
+Input #0, mov,mp4,m4a,3gp,3g2,mj2, from 'new7.m4a':
   Metadata:
     major_brand     : mp42
     minor_version   : 0
     compatible_brands: isommp42
-    creation_time   : 2018-10-28T03:19:38.000000Z
+    creation_time   : 2018-10-28T07:18:05.000000Z
     com.android.version: 7.0
   Duration: 00:00:47.77, start: 0.000000, bitrate: 130 kb/s
     Stream #0:0(eng): Audio: aac (LC) (mp4a / 0x6134706D), 48000 Hz, stereo, fltp, 128 kb/s (default)
     Metadata:
-      creation_time   : 2018-10-28T03:19:38.000000Z
+      creation_time   : 2018-10-28T07:18:05.000000Z
       handler_name    : SoundHandle
 Stream mapping:
   Stream #0:0 -> #0:0 (aac (native) -> flac (native))
 Press [q] to stop, [?] for help
-[flac @ 000001c0a41cf940] encoding as 24 bits-per-sample
+[flac @ 0000024c1b80f940] encoding as 24 bits-per-sample
 Output #0, flac, to 'formatted_file.flac':
   Metadata:
     major_brand     : mp42
@@ -34,8 +34,8 @@ Output #0, flac, to 'formatted_file.flac':
     encoder         : Lavf58.19.102
     Stream #0:0(eng): Audio: flac, 48000 Hz, mono, s32 (24 bit), 128 kb/s (default)
     Metadata:
-      creation_time   : 2018-10-28T03:19:38.000000Z
+      creation_time   : 2018-10-28T07:18:05.000000Z
       handler_name    : SoundHandle
       encoder         : Lavc58.34.100 flac
-size=    3694kB time=00:00:47.76 bitrate= 633.5kbits/s speed= 373x    
-video:0kB audio:3686kB subtitle:0kB other streams:0kB global headers:0kB muxing overhead: 0.222132%
+size=    3712kB time=00:00:47.76 bitrate= 636.6kbits/s speed= 379x    
+video:0kB audio:3704kB subtitle:0kB other streams:0kB global headers:0kB muxing overhead: 0.221060%
