@@ -8,6 +8,10 @@ const bodyParser = require('body-parser')
 const PORT = 3000;
 const remoteBucketURL = "gs://silicon-alpha-220717.appspot.com"
 
+const getSummary = require("./components/getSummary")
+
+const processText = getSummary.processText
+
 const app = express()
 app.use(bodyParser.json())
 
@@ -100,6 +104,11 @@ app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Credentials', true);
 
     next()
+})
+
+downloadFile("4.m4a", async () => {
+    let str = await getText("4.m4a");
+    processText(str)
 })
 
 app.post('/', (req, res) => {

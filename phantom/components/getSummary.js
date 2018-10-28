@@ -1,12 +1,12 @@
 const NLU_MODULE = require('watson-developer-cloud/natural-language-understanding/v1.js');
 
-let str = 
-    "thank you for calling T-Mobile this is Patrick, how may I help you\n" +                                      
-    "Howdy, my daughter's phone was dropped into the toilet\n" +                     // Issue
-    "Where are you located and what kind of phone does you daughter have?\n" +   // Issue
-    "I live in Chicago and my daughter has the iPhone 7\n" + 
-    "Alright, well the Apple Store will be better equipped to assist you.\n" + 
-    "Ok, thanks for your help\n" + 
+let str =
+    "thank you for calling T-Mobile this is Patrick, how may I help you\n" +
+    "Howdy, my daughter's phone was dropped into the toilet\n" + // Issue
+    "Where are you located and what kind of phone does you daughter have?\n" + // Issue
+    "I live in Chicago and my daughter has the iPhone 7\n" +
+    "Alright, well the Apple Store will be better equipped to assist you.\n" +
+    "Ok, thanks for your help\n" +
     "You're welcome thank you for calling T-Mobile have a nice day\n";
 
 const bluemix_auth = require('./auth/bluemix.json')
@@ -18,24 +18,23 @@ function getSummary(keywords, keywordsScore, str, location) {
     let issueSummary = "Issues: \n";
     let solSummary = "Solutions: \n";
     //Situation, Duration
-    for(var i = 0; i < keywords.length; i++){
-        if(keywordsScore[i] < 0){ //negative score
+    for (var i = 0; i < keywords.length; i++) {
+        if (keywordsScore[i] < 0) { //negative score
             var splitStr = str.split('\n');
             splitStr.forEach(element => {
 
-                if(element.includes(keywords[i]) && !issueSummary.includes(keywords[i])) {
-                    issueSummary += element + "\n";                    
-                } 
+                if (element.includes(keywords[i]) && !issueSummary.includes(keywords[i])) {
+                    issueSummary += element + "\n";
+                }
             })
             str.indexOf(keywords[i]);
-        }
-        else if(keywordsScore[i] > 0) { //positive score
+        } else if (keywordsScore[i] > 0) { //positive score
             var splitStr = str.split('\n');
             splitStr.forEach(element => {
-                if(element.includes(keywords[i]) && !solSummary.includes(keywords[i]) && !issueSummary.includes(keywords[i])) {
-                    if(!element.includes("thank"))
-                        solSummary += element + "\n";                    
-                } 
+                if (element.includes(keywords[i]) && !solSummary.includes(keywords[i]) && !issueSummary.includes(keywords[i])) {
+                    if (!element.includes("thank"))
+                        solSummary += element + "\n";
+                }
             })
             str.indexOf(keywords[i]);
         }
@@ -111,9 +110,9 @@ function doAnalysis(array) {
             //let joy = word.emotion.joy;
             keywords.push(text);
             keywordsScore.push(score);
-        })   
+        })
         jsonObj.entities.forEach(word => {
-            if(word.type == "Location" && !location.includes(word.text))
+            if (word.type == "Location" && !location.includes(word.text))
                 location.push(word.text);
         })
     })
@@ -123,4 +122,6 @@ function doAnalysis(array) {
 }
 
 
-processText(str)
+module.exports = {
+    processText
+}
